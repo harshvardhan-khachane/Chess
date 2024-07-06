@@ -4,6 +4,11 @@ let turn = 'W';
 let enPassantTarget = null;
 let moveCounter = 0;
 
+let whiteTime = 300; 
+let blackTime = 300; 
+let timerInterval;
+let timerStarted = false;
+
 document.querySelectorAll('.box').forEach(box => {
     box.addEventListener('click', handleBoxClick);
     box.addEventListener('dragstart', handleDragStart);
@@ -12,8 +17,36 @@ document.querySelectorAll('.box').forEach(box => {
     box.addEventListener('dragend', handleDragEnd);
 });
 
+function startTimer() {
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+        if (turn === 'W') {
+            whiteTime--;
+            updateTimerDisplay('white-timer', whiteTime);
+            if (whiteTime <= 0) {
+                alert("Time's up! Black wins!");
+                resetBoard();
+            }
+        } else {
+            blackTime--;
+            updateTimerDisplay('black-timer', blackTime);
+            if (blackTime <= 0) {
+                alert("Time's up! White wins!");
+                resetBoard();
+            }
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay(timerId, time) {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    document.getElementById(timerId).innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+}
+
 function handleBoxClick(event) {
     const box = event.target.closest('.box');
+    
     if (!selectedPiece && box.querySelector('img')) {
         if (turn === box.querySelector('img').id[0]) {
             selectedPiece = box;
@@ -41,6 +74,12 @@ function handleBoxClick(event) {
             selectedPieceType = '';
             pawnPromotion(box);
             checkGameState();
+            
+            if (!timerStarted && turn === 'W') {
+                timerStarted = true;
+                startTimer();
+            }
+            
             turn = turn === 'W' ? 'B' : 'W';
             document.getElementById('toggle').innerText = `${turn === 'W' ? "White's Turn" : "Black's Turn"}`;
         } else {
@@ -90,6 +129,12 @@ function handleDrop(event) {
         selectedPieceType = '';
         pawnPromotion(box);
         checkGameState();
+        
+        if (!timerStarted && turn === 'W') {
+            timerStarted = true;
+            startTimer();
+        }
+        
         turn = turn === 'W' ? 'B' : 'W';
         document.getElementById('toggle').innerText = `${turn === 'W' ? "White's Turn" : "Black's Turn"}`;
     }
@@ -413,8 +458,6 @@ function getPathBetween(fromBox, toBox) {
     return path;
 }
 
-
-
 function insertImages() {
     document.querySelectorAll('.box').forEach(image => {
         if (image.innerText.length !== 0) {
@@ -489,6 +532,12 @@ function resetBoard() {
     document.getElementById('toggle').innerText = "White's Turn";
     enPassantTarget = null;
     moveCounter = 0;
+
+    whiteTime = 300;
+    blackTime = 300;
+    updateTimerDisplay('white-timer', whiteTime);
+    updateTimerDisplay('black-timer', blackTime);
+    timerStarted = false;
 }
 
 insertImages();
