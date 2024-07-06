@@ -9,6 +9,17 @@
 <body>
     <div class="container">
         <h1>Chess</h1>
+        <div class="timers">
+            <div class="timer-container">
+                <div class="timer-label">White's Timer</div>
+                <div id="white-timer">5:00</div>
+            </div>
+            <div class="timer-container">
+                <div class="timer-label">Black's Timer</div>
+                <div id="black-timer">5:00</div>
+            </div>
+        </div>
+
         <ul>
             <div class="div" id="8-row">
                 <li class="box" id="H8" draggable="true">Brook</li>
@@ -107,5 +118,9 @@
 
     <script src="./logic.js"></script>
     <script src="./speech.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+    </script>
 </body>
 </html>
