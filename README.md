@@ -1,6 +1,10 @@
-# Hands-Free Chess
+# Voice Enabled Chess
 
 Hands-Free Chess is a web-based chess game that can be played using speech recognition or traditional mouse controls. The game is built using HTML, CSS, and JavaScript and runs on an Express server.
+
+## Deployed Website
+
+You can play the game online at [Voice Enabled Chess](https://voiceenabledchess.onrender.com/).
 
 ## Features
 
