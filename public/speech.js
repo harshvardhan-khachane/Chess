@@ -7,15 +7,21 @@ if ('webkitSpeechRecognition' in window) {
     const micBtn = document.getElementById('mic-btn');
     const speechOutput = document.getElementById('speech-output');
 
+    let isRecording = false;
+
     micBtn.addEventListener('click', () => {
-        recognition.start();
-        micBtn.disabled = true;
+        if (isRecording) {
+            recognition.stop();
+        } else {
+            recognition.start();
+        }
+        isRecording = !isRecording;
+        micBtn.disabled = false;
     });
 
     recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript.trim().toUpperCase();
         speechOutput.textContent = transcript;
-        micBtn.disabled = false;
         
         if (/^[A-H][1-8]$/.test(transcript)) {
             const box = document.getElementById(transcript);
@@ -31,6 +37,9 @@ if ('webkitSpeechRecognition' in window) {
     };
 
     recognition.onend = () => {
+        if (isRecording) {
+            recognition.start();
+        }
         micBtn.disabled = false;
     };
 } else {

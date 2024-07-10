@@ -1,27 +1,33 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
     display: flex;
-    place-items: center;
+    align-items: center;
     justify-content: center;
-    overflow-x: hidden;
     height: 100vh;
+    background: url('https://example.com/chessboard-background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    overflow: hidden;
 }
 
 .container {
     display: flex;
     align-items: center;
-    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    gap: 20px;
 }
 
 .timers {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: 20px;
 }
 
 #white-timer, #black-timer {
@@ -37,9 +43,32 @@ body {
 }
 
 .board {
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.labels {
+    display: flex;
+    flex-direction: column;
+}
+
+.label-row, .board-grid {
+    display: flex;
+}
+
+.label-column, .grid {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    width: 75px;
+    height: 75px;
+    display: flex;
     justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: black;
 }
 
 .div {
@@ -62,32 +91,52 @@ li {
     width: 75px;
     height: 75px;
     place-items: center;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #f0d9b5;
+    border: 1px solid #b58863;
+    position: relative;
+}
+
+.box:nth-child(even) {
+    background-color: #b58863;
+}
+
+.box.highlight {
+    background-color: yellow !important;
+}
+
+.box.highlight::after {
+    content: '';
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    border: 2px solid red;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
 
 h1 {
-    margin: 20px;
-    font-size: 2.5rem;
+    font-size: 2rem;
     text-align: center;
     color: black;
     border: 2px solid black;
     padding: 10px;
     background-color: grey;
     border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 #toggle {
-    margin: 40px 0px;
     font-size: 1.5rem;
-    text-align: left;
+    text-align: center;
     background-color: #fff;
     color: #000;
     border: 2px solid #fff;
     padding: 10px;
     border-radius: 5px;
+    margin: 20px 0;
 }
 
 #reset-btn {
@@ -101,6 +150,37 @@ h1 {
     font-size: 16px;
     margin-top: 4px;
     cursor: pointer;
+    border-radius: 5px;
+}
+
+.mic-btn {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    display: inline-block;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.mic-btn.recording {
+    background-color: #ff5722;
+}
+
+.speech-output {
+    display: block;
+    padding: 10px;
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #000;
+    border-radius: 5px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 20px;
+    width: 300px;
 }
 
 .all-img {
@@ -113,21 +193,18 @@ h1 {
     transform: scale(.7);
 }
 
-.authcont {
-    width: 100vw;
-}
+@media (max-width: 1200px) {
+    .container {
+        flex-direction: column;
+    }
 
-.author {
-    float: right;
-    margin-right: 50px;
-}
-
-.highlight {
-    background-color: yellow !important;
+    .board {
+        margin-bottom: 20px;
+    }
 }
 
 @media (max-width: 650px) {
-    .box {
+    .box, .label {
         width: 11vw;
         height: 11vw;
     }
@@ -141,7 +218,7 @@ h1 {
         font-size: 20px;
     }
 
-    #reset-btn {
+    #reset-btn, .mic-btn {
         font-size: 10px;
     }
 
