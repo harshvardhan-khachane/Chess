@@ -9,6 +9,9 @@ body {
     justify-content: center;
     overflow-x: hidden;
     height: 100vh;
+    background-image: url('./bg.jpg'); 
+    background-size: cover; 
+    background-position: center;
 }
 
 .container {
