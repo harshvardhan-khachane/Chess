@@ -27,13 +27,14 @@ body {
 #white-timer, #black-timer {
     font-size: 2rem;
     margin-bottom: 20px;
-    background-color: #fff;
-    color: #000;
-    border: 2px solid #000;
+    background-color: #000;
+    color: #FFD700;
+    border: 3px solid hwb(51 16% 9%);
     padding: 10px;
     border-radius: 5px;
     width: 100px;
     text-align: center;
+    margin-left: 0px;
 }
 
 .board {
@@ -58,49 +59,57 @@ li {
 }
 
 .box {
-    margin: .5px;
-    width: 75px;
-    height: 75px;
+    margin: 2px;
+    width: 65px;
+    height: 65px;
     place-items: center;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+    box-shadow: 2px 2px 5px rgba(255, 215, 0, 0.9);
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #ece1a8;
 }
 
 h1 {
     margin: 20px;
     font-size: 2.5rem;
     text-align: center;
-    color: black;
-    border: 2px solid black;
+    color: #FFD700;
+    border: 2px solid #FFD700;
     padding: 10px;
-    background-color: grey;
+    background-color: #000;
     border-radius: 5px;
 }
 
 #toggle {
-    margin: 40px 0px;
+    margin: 40px 20px;
     font-size: 1.5rem;
     text-align: left;
-    background-color: #fff;
-    color: #000;
-    border: 2px solid #fff;
+    background-color: #000;
+    color: #FFD700;
+    border: 3px solid #FFD700;
     padding: 10px;
+    display: block;
     border-radius: 5px;
+    width: 100%; /* Ensure button takes full width */
+     /* Include padding and border in width calculation */
+
 }
 
 #reset-btn {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
+    background-color: #000;
+    border: 3px solid #FFD700; /* Golden border */
+    color: #FFD700;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    display: block;
     font-size: 16px;
-    margin-top: 4px;
+    margin-top: 10px;
+    margin-left: 20px; /* Push the button to the left */
+    margin-right: 20px; /* Push the button to the right */
     cursor: pointer;
+
 }
 
 .all-img {
@@ -125,6 +134,7 @@ h1 {
 .highlight {
     background-color: yellow !important;
 }
+
 
 @media (max-width: 650px) {
     .box {
@@ -159,4 +169,20 @@ h1 {
         margin: 30px;
         font-size: 10px;
     }
+}
+
+#mic-btn {
+    padding: 10px 20px;
+    background-color: #000300; /* Example background color */
+    color: white; /* Text color */
+    border: 3px solid #FFD700; /* Golden border */
+    cursor: pointer;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    margin-right: 20px;
+     margin-left: 20px;
+}
+
+#mic-btn:hover {
+    background-color: #FFD700; /* Darker color on hover */
 }
