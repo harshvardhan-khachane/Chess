@@ -6,17 +6,23 @@ if ('webkitSpeechRecognition' in window) {
 
     const micBtn = document.getElementById('mic-btn');
     const speechOutput = document.getElementById('speech-output');
+    let isRecording = false;
 
     micBtn.addEventListener('click', () => {
-        recognition.start();
-        micBtn.disabled = true;
+        if (isRecording) {
+            recognition.stop();
+            micBtn.textContent = '🎤';
+        } else {
+            recognition.start();
+            micBtn.textContent = '🛑';  
+        }
+        isRecording = !isRecording;
     });
 
     recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript.trim().toUpperCase();
         speechOutput.textContent = transcript;
-        micBtn.disabled = false;
-        
+
         if (/^[A-H][1-8]$/.test(transcript)) {
             const box = document.getElementById(transcript);
             if (box) {
@@ -27,11 +33,13 @@ if ('webkitSpeechRecognition' in window) {
 
     recognition.onerror = (event) => {
         console.error('Speech recognition error:', event.error);
-        micBtn.disabled = false;
+        isRecording = false;
+        micBtn.textContent = '🎤';  
     };
 
     recognition.onend = () => {
-        micBtn.disabled = false;
+        isRecording = false;
+        micBtn.textContent = '🎤'; 
     };
 } else {
     console.error('Web Speech API is not supported in this browser.');
